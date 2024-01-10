@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Popup from "./Popup";
+import NewRoomPopup from "./NewRoomPopup";
 
 export default function AddButton() {
   const [seen, setSeen] = useState(false);
@@ -32,7 +32,7 @@ export default function AddButton() {
           <path d="M12 16V8" strokeWidth="1.5"></path>
         </svg>
       </button>
-      {seen ? <Popup toggle={togglePop} /> : null}
+      {seen ? <NewRoomPopup toggle={togglePop} /> : null}
     </div>
   );
 }

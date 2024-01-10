@@ -1,17 +1,27 @@
 "use client";
 
 import React, { useState } from "react";
+import ImagesPopup from "./ImagesPopup";
 import axios from "axios";
 
 export default function InputBox() {
   const [keyCode, setKeyCode] = useState("");
+  const [userImages, setUserImages] = useState([]);
+  const [seen, setSeen] = useState(false);
   let userKeyCode = "";
+
+  const togglePop = () => {
+    setSeen(!seen);
+  };
 
   const handleOnClick = () => {
     userKeyCode = keyCode;
     axios
       .get(`http://localhost:5004/rooms/${userKeyCode}`)
-      .then((res) => console.log(res.data))
+      .then((res) => {
+        setUserImages(res.data.images);
+        togglePop();
+      })
       .catch((err) => console.log(err));
 
   };
@@ -30,7 +40,7 @@ export default function InputBox() {
           placeholder="Cache Key"
           value={keyCode}
           onChange={handleOnChange}
-          className="font-medium text-xl text-black shadow-md border border-black shadow-black rounded-lg outline-none p-4 max-w-[190px] transition-[.4s] hover:shadow-lg focus:shadow-lg focus:shadow-black bg-transparent placeholder:text-black"
+          className="font-medium text-xl text-black shadow-md text-center border border-black shadow-black rounded-lg outline-none p-4 max-w-[190px] transition-[.4s] hover:shadow-lg focus:shadow-lg focus:shadow-black bg-transparent placeholder:text-black placeholder:text-center"
         />
       </div>
       <button
@@ -39,6 +49,7 @@ export default function InputBox() {
       >
         Enter
       </button>
+      {seen ? <ImagesPopup toggle={togglePop} images={userImages}/> : null}
     </div>
   );
 }

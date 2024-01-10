@@ -2,8 +2,7 @@
 
 import React, { useState } from "react";
 
-
-export default function Popup(props) {
+export default function NewRoomPopup({toggle}) {
   const [name, setName] = useState("");
   const [keyCode, setKeyCode] = useState("");
   const [images, setImages] = useState([]);
@@ -13,7 +12,7 @@ export default function Popup(props) {
     "w-full p-[5px] rounded-[5px] border border-[#ccc] border-sm mb-[10px] outline-none";
 
   const handleClose = () => {
-    props.toggle();
+    toggle();
   };
 
   const handleUpload = ({ target }) => {
@@ -42,8 +41,8 @@ export default function Popup(props) {
           >
             <path
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               strokeWidth="2"
               d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
             />
@@ -70,9 +69,17 @@ export default function Popup(props) {
                 className={`${inputStyle}`}
               />
             </label>
-            <input type="file" multiple={true} value={images} onChange={handleUpload} className={`${inputStyle}`}/>
+            <input
+              type="file"
+              multiple={true}
+              value={images}
+              onChange={handleUpload}
+              className={`${inputStyle}`}
+            />
           </form>
-          <button className="text-xl p-2 hover:-translate-y-[0.2em] active:translate-y-[0.2em]">Create</button>
+          <button className="text-xl p-2 hover:-translate-y-[0.2em] active:translate-y-[0.2em]">
+            Create
+          </button>
         </div>
       </div>
     </div>
